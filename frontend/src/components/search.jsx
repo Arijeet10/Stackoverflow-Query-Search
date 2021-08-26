@@ -222,15 +222,6 @@ function Search(props) {
                 //     <button type='submit' onClick={handleSubmit}>Search</button>
                 // </form>
             )}
-            {data.map(
-                (item, index) => (
-                    <div key={index}>
-                        <a rel="noopener noreferrer" href={item[1]} target="_blank" style={{ textDecoration: "none" }}>
-                            <p>{item[0]}</p>
-                        </a>
-                    </div>
-                )
-            )}
             <button type="submit" className="btn btn-secondary" onClick={handleNextPage}>
                 Next Page
             </button>
