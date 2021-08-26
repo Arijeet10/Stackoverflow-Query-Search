@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { connect, useDispatch } from 'react-redux';
-import { setData } from '../redux/actions/reduxAction';
-import { Link } from "react-router-dom"
+import { setData, setSearchInput } from '../redux/actions/reduxAction';
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 function Search(props) {
 
-    const { data } = props  //destructuring the data state
+    const { data,search } = props  //destructuring the data state
 
     const dispatch = useDispatch()  //to dispatch the data to redux actions
 
@@ -45,12 +44,12 @@ function Search(props) {
     }
 
 
-    let str;
+    //let str;
 
     function getSearchData() {
         //retrieving search results from django server
         axios
-            .get(`http://127.0.0.1:8000/query/${str}/${pageNo}`)
+            .get(`http://127.0.0.1:8000/query/${search}/${pageNo}`)
             .then(res => dispatch(setData(res.data)))
             .catch(err => console.log(err))
     }
@@ -58,13 +57,15 @@ function Search(props) {
     //on form submit it calls a function to fetch search results and if success then stores the results in an array of objects 
     function handleSubmit(e) {
         e.preventDefault();
-        str = Object.entries(params).map(([key, val]) => `${key}=${encodeURIComponent(val)}`).join('&'); //serializing the user input object into list of url query params
-        if (params.q !== "") {
-            getSearchData();
-        } else {
-            alert("cannot search empty field")  //if there is no user input
+        //str = Object.entries(params).map(([key, val]) => `${key}=${encodeURIComponent(val)}`).join('&'); //serializing the user input object into list of url query params
+        if(params){
+            dispatch(setSearchInput(params))
+            if (params.q !== "") {
+                getSearchData();
+            } else {
+                alert("cannot search empty field")  //if there is no user input
+            }
         }
-
     }
 
     return (
@@ -242,7 +243,8 @@ function Search(props) {
 }
 
 const mapStateToProps = state => ({
-    data: state.Data.data
+    data: state.Data.data,
+    search:state.Data.search
 })
 
-export default connect(mapStateToProps)(Search)
+export default connect(mapStateToProps,{setSearchInput})(Search)
