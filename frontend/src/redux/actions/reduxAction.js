@@ -13,3 +13,10 @@ export const setSearchInput=(data)=>{
         payload:Object.entries(data).map(([key, val]) => `${key}=${encodeURIComponent(val)}`).join('&') //serializing the user input object into list of url query params
     }
 }
+
+export const setReset=data=>{
+    return{
+        type:ActionTypes.SET_RESET,
+        payload:data
+    }
+}

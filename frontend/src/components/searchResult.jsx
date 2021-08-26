@@ -1,6 +1,13 @@
-import React from 'react'
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import {Link} from 'react-router-dom';
+import {setReset} from '../redux/actions/reduxAction';
 
 function Result(props) {
+    const dispatch=useDispatch()
+    function handleReset(){
+        dispatch(setReset())
+    }
 
     function handleClick(){
         props.handleNextPage()
@@ -8,6 +15,9 @@ function Result(props) {
 
     return (
         <div>
+            <Link to={"/"} onClick={handleReset} style={{textDecoration:"none"}}>
+                <button type="submit">Search</button>
+            </Link>
             {
                 props.data.map(
                     (item, index) => (

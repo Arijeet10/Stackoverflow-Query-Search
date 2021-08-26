@@ -18,6 +18,12 @@ export const reducer=(state=inititalState,{type,payload})=>{
                 ...state,
                 data:payload
             };     
+        case ActionTypes.SET_RESET:
+            return{
+                search:{},
+                data:[],
+                loading:false
+            }
         default:
             return{
                 ...state
