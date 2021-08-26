@@ -12,5 +12,5 @@ Node - https://nodejs.org/en/download/
 -Then download the zip file and extract it
 
 -open the project file in code editor and run the app
-
-  python manage.py runserver
+  
+    python manage.py runserver
