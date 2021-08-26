@@ -22,7 +22,7 @@ Node - https://nodejs.org/en/download/
     python manage.py runserver
 
 
-#Demo:
+# App Demo
 
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/87312638/130920228-e50584b0-c229-42b5-be0c-36f5488fb41d.gif)
 
